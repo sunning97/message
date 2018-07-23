@@ -10,6 +10,13 @@
     import Conversation from './Conversation';
 
     export default {
+        props:{
+            user:{
+                type:Object,
+                default:null,
+                required:true
+            }
+        },
         data(){
           return {
               contacts:[],
