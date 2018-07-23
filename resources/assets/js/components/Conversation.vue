@@ -24,7 +24,16 @@
         },
         methods:{
             getMessage:function (content) {
-                this.$emit('message',content);
+                if(!this.contact)
+                {
+                    return;
+                }
+                axios.post('/conversation/send',{
+                    contact_id:this.contact.id,
+                    contentt:content
+                }).then(response=>{
+                    this.$emit('new',response.data);
+                });
             }
         },
         components:{

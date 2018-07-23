@@ -1,5 +1,5 @@
 <template>
-    <div class="message-feed">
+    <div class="message-feed" ref="feed">
         <ul>
             <li v-for="message in messages" :class="(contact.id == message.send_from) ? 'reveived' : 'send text-right'">
                 <div class="text">{{ message.content }}</div>
@@ -18,6 +18,21 @@
             contact:{
                 type:Object,
                 default:null,
+            }
+        },
+        methods:{
+            scroll:function () {
+                setTimeout(()=>{
+                    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+                },50);
+            }
+        },
+        watch:{
+            contact(contact){
+                this.scroll();
+            },
+            messages(message){
+                this.scroll();
             }
         }
     }

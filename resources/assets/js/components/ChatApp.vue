@@ -1,6 +1,6 @@
 <template>
     <div class="chat row">
-        <conversation :contact="contact" :messages="messages" @message="message" class="col-8"></conversation>
+        <conversation :contact="contact" :messages="messages" @new="saveNewMessage" class="col-8"></conversation>
         <list-contact :contacts="contacts" @selectedContact="selectedContact" class="col-4"></list-contact>
     </div>
 </template>
@@ -33,8 +33,8 @@
                     this.messages = response.data;
                 });
             },
-            message:function (content) {
-                console.log(content);
+            saveNewMessage:function (res) {
+                this.messages.push(res)
             }
         },
         components:{

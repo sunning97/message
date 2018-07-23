@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/get-contacts','ContactController@getAllContacts');
 Route::post('/get-conversation/{id}','ContactController@getConversation');
+Route::post('/conversation/send','ContactController@send');
