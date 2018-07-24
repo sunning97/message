@@ -36,12 +36,22 @@
             selectedContact:function (contact) {
                 this.contact = contact;
                 axios.post(`/get-conversation/${contact.id}`).then(response=>{
-                    console.log(response.data);
                     this.messages = response.data;
                 });
+
+                Echo.private(`message.${this.user.id}`)
+                    .listen('MessageEvent', (e) => {
+                        console.log(e);
+                        this.handleInComing(e);
+                    });
             },
             saveNewMessage:function (res) {
                 this.messages.push(res)
+            },
+            handleInComing:function (e) {
+                if(this.contact && e.mess.send_from == this.contact.id){
+                    this.saveNewMessage(e.mess);
+                }
             }
         },
         components:{

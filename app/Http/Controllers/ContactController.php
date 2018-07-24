@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageEvent;
 use App\Message;
 use App\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class ContactController extends Controller
         $message->send_from = Auth::user()->id;
         $message->content = $request->contentt;
         $message->save();
+        broadcast(new MessageEvent($message));
         return response()->json($message,200);
     }
 }
