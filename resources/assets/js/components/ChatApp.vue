@@ -41,7 +41,6 @@
 
                 Echo.private(`message.${this.user.id}`)
                     .listen('MessageEvent', (e) => {
-                        console.log(e);
                         this.handleInComing(e);
                     });
             },
